@@ -1,6 +1,15 @@
 @import "~bootstrap/scss/bootstrap-reboot.scss";
 @import "~bootstrap/scss/bootstrap.scss";
 
+body {
+    background: url(./background.jpg);
+    background-size: cover;
+}
+
+html {
+    overflow: hidden;
+}
+
 html, body, #root {
     height: 100%;
 }
