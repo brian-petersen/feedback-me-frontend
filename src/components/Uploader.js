@@ -42,25 +42,23 @@ export default class Uploader extends Component {
     const { selectedFile } = this.state
 
     if (this.canUpload()) {
-      const formData = new FormData()
-      formData.append('userfile', selectedFile)
+      try {
+        const formData = new FormData()
+        formData.append('userfile', selectedFile)
 
-      this.setState({ uploadedKey: '5c3c' })
+        const res = await axios.post('https://brandon-twede.net/feedback/upload.php', formData)
+
+        this.setState({ uploadedKey: res.data })
+      }
+      catch (err) {
+        console.error(err)
+
+        this.setState({ hasError: true })
+      }
     }
     else {
       console.log('TODO show error')
     }
-
-    // try {
-      // const res = await axios.post('https://brandon-twede.net/feedback/upload.php', formData)
-
-      // this.setState({ uploadedKey: res.data })
-    // }
-    // catch (err) {
-    //   console.error(err)
-
-    //   this.setState({ hasError: true })
-    // }
   }
 
   renderUploader = () => {
