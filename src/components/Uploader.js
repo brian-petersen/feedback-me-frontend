@@ -41,10 +41,15 @@ export default class Uploader extends Component {
   handleUpload = async () => {
     const { selectedFile } = this.state
 
-    const formData = new FormData()
-    formData.append('userfile', selectedFile)
+    if (this.canUpload()) {
+      const formData = new FormData()
+      formData.append('userfile', selectedFile)
 
-    this.setState({ uploadedKey: '5c3c' })
+      this.setState({ uploadedKey: '5c3c' })
+    }
+    else {
+      console.log('TODO show error')
+    }
 
     // try {
       // const res = await axios.post('https://brandon-twede.net/feedback/upload.php', formData)
