@@ -2,9 +2,7 @@ import React, { Component } from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
 import Uploader from './components/Uploader'
-import Feedback from './components/Feedback'
-
-import styles from './App.module.scss'
+import Feedback from './components/Feedback.1'
 
 export default class App extends Component {
   render() {

@@ -5,7 +5,9 @@ import { fas } from '@fortawesome/free-solid-svg-icons'
 
 import App from './App'
 
-import './assets/bootstrap.scss'
+import 'normalize.css/normalize.css'
+
+import './assets/index.css'
 
 library.add(fas)
 
