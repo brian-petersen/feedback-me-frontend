@@ -1,0 +1,19 @@
+.Home {
+  color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 28em;
+  transform: translateY(-50%);
+  text-shadow: 1px 1px 1px #000;
+
+  h1 {
+    font-size: 2em;
+    margin: 0;
+  }
+
+  ol {
+    margin: 0;
+    padding: 0;
+    padding-left: 1.8em;
+  }
+}

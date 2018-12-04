@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
-import Uploader from './components/Uploader'
+import Home from './components/Home'
 import Feedback from './components/Feedback.1'
 
 export default class App extends Component {
@@ -9,7 +9,7 @@ export default class App extends Component {
     return (
       <BrowserRouter>
         <Switch>
-          <Route path="/" exact component={Uploader} />
+          <Route path="/" exact component={Home} />
           <Route path="/feedback/:key" component={Feedback} />
         </Switch>
       </BrowserRouter>
