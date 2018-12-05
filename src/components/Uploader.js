@@ -5,12 +5,10 @@ import axios from 'axios'
 
 import './Uploader.css'
 
-// import styles from './Uploader.module.scss'
-
 export default class Uploader extends Component {
   constructor(props) {
     super(props)
-''
+
     this.state = {
       selectedFile: null,
       uploadedKey: null,

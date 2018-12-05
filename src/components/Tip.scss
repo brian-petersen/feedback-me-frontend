@@ -1,0 +1,28 @@
+.Tip {
+  text-align: center;
+
+  textarea {
+    padding: .3em;
+  }
+
+  button {
+    background: #409FFF;
+    border: 1px solid #409FFF;
+    border-radius: 1.25em;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font-size: .9em;
+    height: 2em;
+    outline: 0;
+    transition: border-color 0.2s cubic-bezier(0.77, 0, 0.175, 1),background-color 0.2s cubic-bezier(0.77, 0, 0.175, 1),color 0.2s cubic-bezier(0.77, 0, 0.175, 1);
+    user-select: none;
+    width: 7em;
+
+    &:hover {
+      background-color: #0073e5;
+      border-color: #0073e5;
+    }
+  }
+}
