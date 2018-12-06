@@ -1,8 +1,19 @@
 .Feedback {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+
   .Spinner {
     display: block;
     margin: 0 auto;
     font-size: 2em;
     margin-top: 3em;
+  }
+
+  .pdf-wrap {
+    height: 100%;
+    width: 75%;
+    overflow-y: auto;
+    position: relative;
   }
 }

@@ -1,0 +1,79 @@
+.Sidebar {
+  width: 25%;
+  overflow: auto;
+  background: #f9f8f7;
+
+  .instructions {
+    padding: 10px;
+
+    h1 {
+      margin: 0;
+    }
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+      padding: 10px;
+      cursor: pointer;
+      transition: background 140ms ease-in;
+      border-bottom: 1px solid #d8d8d8;
+      position: relative;
+
+      &:hover {
+        background: #e8e6e3;
+
+        .delete {
+          opacity: .5;
+        }
+      }
+
+      .delete {
+        opacity: 0;
+        font-size: 1.8em;
+        line-height: 1;
+        position: absolute;
+        top: -4px;
+        right: 2px;
+        transition: opacity 50ms linear;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+
+      .comment-text {
+        font-weight: bold;
+      }
+
+      .highlight-text {
+        padding: 0;
+        margin: 0;
+
+        &::before {
+          content: open-quote;
+        }
+
+        &::after {
+          content: close-quote;
+        }
+      }
+
+      .highlight-image {
+        overflow: auto;
+        max-width: 300px;
+        border: 1px dashed;
+        margin-top: 5px;
+      }
+
+      .highlight-location {
+        margin-top: 0.5rem;
+        text-align: right;
+        font-size: 10px;
+      }
+    }
+  }
+}
