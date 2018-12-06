@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
 import classnames from 'classnames'
 import axios from 'axios'
 
@@ -57,7 +58,7 @@ export default class Uploader extends Component {
       }
     }
     else {
-      console.log('TODO show error')
+      // TODO show something saying a file must be selected before submitting
     }
   }
 
@@ -121,10 +122,18 @@ export default class Uploader extends Component {
       <div className="uploaded">
         <p>You're Ready!</p>
 
+        {/* TODO change the copied notification to something better */}
+
         <div className="shareLink">
           <div className="linkLabel">Feedback Url</div>
           <hr />
           <div className="linkWrap">
+            <CopyToClipboard
+              text={feedbackUrl}
+              onCopy={() => alert('Copied the feedback url.')}>
+              <Icon className="copy" icon="clipboard" title="Copy to Clipboard" />
+            </CopyToClipboard>
+            {' '}
             <a href={feedbackUrl} target="_blank">{feedbackUrl}</a>
           </div>
         </div>
@@ -133,6 +142,12 @@ export default class Uploader extends Component {
           <div className="linkLabel">Review Url</div>
           <hr />
           <div className="linkWrap">
+            <CopyToClipboard
+              text={reviewUrl}
+              onCopy={() => alert('Copied the review url.')}>
+              <Icon className="copy" icon="clipboard" title="Copy to Clipboard" />
+            </CopyToClipboard>
+            {' '}
             <a href={reviewUrl} target="_blank">{reviewUrl}</a>
           </div>
         </div>

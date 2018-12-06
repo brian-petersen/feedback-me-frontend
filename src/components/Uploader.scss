@@ -262,7 +262,16 @@
     }
 
     .linkWrap {
-      overflow: auto;
+      overflow: hidden;
+
+      .copy {
+        cursor: pointer;
+        transition: opacity 50ms linear;
+
+        &:hover {
+          opacity: .7;
+        }
+      }
     }
   }
 }
