@@ -46,7 +46,7 @@ export default class Uploader extends Component {
         const formData = new FormData()
         formData.append('file', selectedFile)
 
-        const res = await axios.post('/upload', formData)
+        const res = await axios.post('/api/upload', formData)
 
         this.setState({ uploadedKey: res.data.id })
       }
