@@ -22,7 +22,7 @@ export default function Sidebar({ highlights, onDeleteHighlight, reviewing }) {
       </div>
 
       <ul className="feedback">
-        {sortedHighlights.length === 0 && reviewing && <i style={{ padding: 10 }}>No feedback has been left yet. Check back soon!</i>}
+        {sortedHighlights.length === 0 && reviewing && <p style={{ paddingLeft: 10, paddingRight: 10 }}><i>No feedback has been left yet. Check back soon!</i></p>}
         {sortedHighlights.length === 0 && !reviewing && <p style={{ paddingLeft: 10, paddingRight: 10 }}><i>No feedback left yet</i></p>}
 
         {sortedHighlights.map(h => (
