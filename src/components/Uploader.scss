@@ -211,6 +211,7 @@
 
   .error {
     padding-top: 7.5em;
+    text-align: center;
 
     p {
       margin: 0;
@@ -227,7 +228,7 @@
 
   .uploaded {
     padding: 1em;
-    padding-top: 2.25em;
+    padding-top: 1.2em;
     text-align: center;
 
     p {
@@ -244,7 +245,7 @@
     }
 
     .clearButton {
-      margin-top: 2em;
+      margin-top: 1em;
       width: 10em;
     }
   }
@@ -262,16 +263,7 @@
     }
 
     .linkWrap {
-      overflow: hidden;
-
-      .copy {
-        cursor: pointer;
-        transition: opacity 50ms linear;
-
-        &:hover {
-          opacity: .7;
-        }
-      }
+      overflow: auto;
     }
   }
 }

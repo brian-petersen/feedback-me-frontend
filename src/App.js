@@ -11,6 +11,7 @@ export default class App extends Component {
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/feedback/:key" component={Feedback} />
+          <Route path="/review/:key" component={Feedback} />
         </Switch>
       </BrowserRouter>
     )

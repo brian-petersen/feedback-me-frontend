@@ -3,19 +3,22 @@ import { sortBy } from 'lodash'
 
 import './Sidebar.css'
 
-export default function Sidebar({ highlights, onDeleteHighlight }) {
+export default function Sidebar({ highlights, onDeleteHighlight, showDirections }) {
   const sortedHighlights = sortBy(highlights, [h => h.position.pageNumber, h => h.position.boundingRect.y1])
 
   return (
     <div className="Sidebar">
       <div className="instructions">
         <h1>Feedback Me</h1>
-        <i>
-          Either highlight text or hold the Alt/Option key then click-and-drag.
-        </i>
+        {showDirections && (
+          <i>
+            Either highlight text or hold the Alt/Option key then click-and-drag.
+          </i>
+        )}
       </div>
 
       <ul>
+        {sortedHighlights.length === 0 && <i style={{ padding: 10 }}>No feedback yet</i>}
         {sortedHighlights.map(h => (
           <li
             key={h.id}
