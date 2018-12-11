@@ -89,7 +89,7 @@ export default class Feedback extends Component {
         <Sidebar
           highlights={highlights}
           onDeleteHighlight={this.handleDeleteHighlight}
-          showDirections={!this.reviewing}
+          reviewing={this.reviewing}
         />
 
         <div className="pdf-wrap">

@@ -5,13 +5,27 @@
 
   .instructions {
     padding: 10px;
+    border-bottom: 1px solid #d8d8d8;
 
     h1 {
       margin: 0;
     }
+
+    p.directions {
+      margin: 15px 0;
+      font-size: 1.05em;
+      font-weight: 500;
+
+      ul {
+        padding: 0;
+        padding-left: 2em;
+        padding-top: .5em;
+        margin: 0;
+      }
+    }
   }
 
-  ul {
+  ul.feedback {
     margin: 0;
     padding: 0;
     list-style: none;
