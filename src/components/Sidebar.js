@@ -11,13 +11,15 @@ export default function Sidebar({ highlights, onDeleteHighlight, reviewing }) {
       <div className="instructions">
         <h1>Feedback Me</h1>
         {!reviewing && (
-          <p className="directions">
-            To create feedback either:
-            <ul>
+          <div>
+            <p className="directions">
+              To create feedback either:
+            </p>
+            <ul className="directions">
               <li>Highlight text</li>
               <li>Hold Alt/Option key then click-and-drag</li>
             </ul>
-          </p>
+          </div>
         )}
       </div>
 
@@ -32,15 +34,17 @@ export default function Sidebar({ highlights, onDeleteHighlight, reviewing }) {
               updateHash(h)
             }}>
             <div>
-              <span
-                className="delete"
-                title="Delete Feedback"
-                onClick={e => {
-                  e.stopPropagation()
-                  onDeleteHighlight(h.id)
-                }}>
-                &times;
-              </span>
+              {!reviewing && (
+                <span
+                  className="delete"
+                  title="Delete Feedback"
+                  onClick={e => {
+                    e.stopPropagation()
+                    onDeleteHighlight(h.id)
+                  }}>
+                  &times;
+                </span>
+              )}
               <div className="comment-text">
                 {h.comment.text}
               </div>

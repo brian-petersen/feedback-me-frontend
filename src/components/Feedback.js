@@ -9,6 +9,7 @@ import {
   Popup,
   AreaHighlight,
 } from 'react-pdf-highlighter'
+import axios from 'axios'
 
 import Tip from './Tip'
 import Sidebar from './Sidebar'
@@ -17,20 +18,80 @@ import './Feedback.css'
 
 export default class Feedback extends Component {
   state = {
-    highlights: []
+    highlights: [],
+    loading: true,
+    error: false,
+    pdfData: null,
   }
 
-  get pdfUrl() {
-    // return `https://brandon-twede.net/feedback/files/${this.props.match.params.key}.pdf`
-    return `${process.env.PUBLIC_URL}/demo.pdf`
+  componentDidMount() {
+    window.addEventListener('hashchange', this.scrollToHighlightFromHash, false)
+
+    this.fetchPdf()
+    this.fetchContent()
+  }
+
+  componentDidUpdate() {
+    this.updateContent()
   }
 
   get reviewing() {
     return this.props.match.path.startsWith('/review')
   }
 
-  componentDidMount() {
-    window.addEventListener('hashchange', this.scrollToHighlightFromHash, false)
+  get id() {
+    return this.props.match.params.key
+  }
+
+  fetchPdf = async () => {
+    try {
+      this.setState({ loading: true })
+      const res = await axios.get(`/api/pdf/${this.id}`, { responseType: 'arraybuffer' })
+      this.setState({ loading: false, pdfData: res.data })
+    }
+    catch (err) {
+      this.setState({ loading: false, error: true })
+    }
+  }
+
+  fetchContent = async () => {
+    if (!this.reviewing) {
+      try {
+        const res = await axios.get(`/api/feedback/${this.id}`)
+
+        if (res.data.hasOwnProperty('highlights')) {
+          this.setState({
+            highlights: res.data.highlights,
+          })
+        }
+      }
+      catch (err) {
+      }
+    }
+    else {
+      try {
+        const res = await axios.get(`/api/review/${this.id}`)
+
+        const highlights = []
+        res.data.forEach(e => {
+          if (e.hasOwnProperty('highlights')) {
+            highlights.push(...e.highlights)
+          }
+        })
+
+        this.setState({ highlights })
+      }
+      catch (err) {
+      }
+    }
+  }
+
+  updateContent = async () => {
+    if (!this.reviewing) {
+      const { highlights } = this.state
+
+      axios.post(`/api/feedback/${this.id}`, { highlights })
+    }
   }
 
   getHighlightById(id) {
@@ -48,41 +109,55 @@ export default class Feedback extends Component {
   }
 
   addHighlight(highlight) {
-    const { highlights } = this.state
+    if (!this.reviewing) {
+      const { highlights } = this.state
 
-    this.setState({
-      highlights: [{ ...highlight, id: uuid(), created: Date.now() }, ...highlights]
-    })
+      this.setState({
+        highlights: [{ ...highlight, id: uuid(), created: Date.now() }, ...highlights]
+      })
+    }
   }
 
   handleUpdateHighlight(highlightId, position, content) {
-    this.setState({
-      highlights: this.state.highlights.map(h => {
-        return h.id === highlightId
-          ? {
-              ...h,
-              position: { ...h.position, ...position },
-              content: { ...h.content, ...content }
-            }
-          : h
+    if (!this.reviewing) {
+      this.setState({
+        highlights: this.state.highlights.map(h => {
+          return h.id === highlightId
+            ? {
+                ...h,
+                position: { ...h.position, ...position },
+                content: { ...h.content, ...content }
+              }
+            : h
+        })
       })
-    })
+    }
   }
 
   handleDeleteHighlight = (id) => {
-    this.setState({
-      highlights: this.state.highlights.reduce((highlights, highlight) => {
-        if (highlight.id !== id) {
-          highlights.push(highlight)
-        }
+    if (!this.reviewing) {
+      this.setState({
+        highlights: this.state.highlights.reduce((highlights, highlight) => {
+          if (highlight.id !== id) {
+            highlights.push(highlight)
+          }
 
-        return highlights
-      }, [])
-    })
+          return highlights
+        }, [])
+      })
+    }
   }
 
   render() {
-    const { highlights } = this.state
+    const { highlights, loading, error, pdfData } = this.state
+
+    if (error) {
+      return <p>Uh oh!</p>
+    }
+
+    if (loading) {
+      return <Spinner />
+    }
 
     return (
       <div className="Feedback">
@@ -93,7 +168,7 @@ export default class Feedback extends Component {
         />
 
         <div className="pdf-wrap">
-          <PdfLoader url={this.pdfUrl} beforeLoad={<Spinner />}>
+          <PdfLoader url={{ data: pdfData }} beforeLoad={<Spinner />}>
             {pdfDocument => (
               <PdfHighlighter
                 pdfDocument={pdfDocument}

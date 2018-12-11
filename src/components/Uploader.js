@@ -44,11 +44,11 @@ export default class Uploader extends Component {
     if (this.canUpload()) {
       try {
         const formData = new FormData()
-        formData.append('userfile', selectedFile)
+        formData.append('file', selectedFile)
 
-        const res = await axios.post('https://brandon-twede.net/feedback/upload.ph', formData)
+        const res = await axios.post('/upload', formData)
 
-        this.setState({ uploadedKey: res.data })
+        this.setState({ uploadedKey: res.data.id })
       }
       catch (err) {
         console.error(err)

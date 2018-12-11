@@ -12,16 +12,20 @@
     }
 
     p.directions {
-      margin: 15px 0;
+      margin: 0;
+      margin-top: 15px;
       font-size: 1.05em;
       font-weight: 500;
+    }
 
-      ul {
-        padding: 0;
-        padding-left: 2em;
-        padding-top: .5em;
-        margin: 0;
-      }
+    ul.directions {
+      font-size: 1.05em;
+      font-weight: 500;
+      padding: 0;
+      padding-left: 2em;
+      padding-top: .5em;
+      margin: 0;
+      margin-bottom: 10px;
     }
   }
 
